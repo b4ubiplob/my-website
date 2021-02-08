@@ -1,38 +1,68 @@
-.App {
-  text-align: center;
+.sidebar {
+  height: 100%;
+  background-color: #f7f7f7;
+  padding: 0;
+  margin: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.right-align {
+  text-align: right;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.thumb-small {
+  display: block;
+  max-width: 250px;
+  max-height: 100px;
+  width: auto;
+  height: auto;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.thumb-medium {
+  display: block;
+  max-width: 800px;
+  max-height: 300px;
+  width: auto;
+  height: auto;
+}
+
+.imageCard {
+  max-width: 300px;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 15vw;
+  object-fit: cover;
+}
+
+.painting-list {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.painting {
+  width: 20rem;
+  overflow: hidden;
+  margin: 1rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.image {
+  width: 100%;
+  height: 20rem;
+  transform: scale(1.1);
+  transition: all 1s;
+}
+
+.image:hover {
+  transform: scale(1.01);
+}
+
+.forms {
+  padding: 2rem;
+}
+
+.painting-buttons {
+  margin: 0 10px;
+  padding: 0 10px;
 }
