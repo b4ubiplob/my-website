@@ -12,6 +12,10 @@ export const getAllDimensions = () => {
   return getAllCall(BASE_API_URL + "/dimensions");
 };
 
+export const getAllPaintingsOfGallery = (gallleryId) => {
+  return getAllCall(BASE_API_URL + "/galleries/" + gallleryId + "/paintings");
+};
+
 export const getAllCall = (url) => {
   return fetch(url)
     .then((response) => response.json())

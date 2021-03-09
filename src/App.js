@@ -12,6 +12,7 @@ import ManagePainting from "./components/ManagePainting";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/Navbar";
+import GalleryViewPage from "./pages/GalleryViewPage";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/" exact component={HomePage} />
         <Route path="/galleries" exact component={GalleryPage} />
         <Route path="/gallery" exact component={ManageGallery} />
+        <Route path="/gallery/:id/paintings" component={GalleryViewPage} />
         <Route path="/gallery/:id" component={ManageGallery} />
         <Route path="/paintings" exact component={PaintingPage} />
         <Route path="/painting" exact component={ManagePainting} />

@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { getAllPaintings } from "../actions/resthandler";
-import { Button } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { getAllPaintingsOfGallery, getGallery } from "../actions/resthandler";
 import Painting from "../components/Painting";
 
-function PaintingPage() {
+function GalleryViewPage(props) {
   const [paintings, setPaintings] = useState("");
+  const [gallery, setGallery] = useState("");
 
   useEffect(() => {
-    getAllPaintings().then((response) => setPaintings(response));
-  }, []);
+    const id = props.match.params.id;
+    if (id) {
+      getGallery(id).then((gallery) => setGallery(gallery));
+      getAllPaintingsOfGallery(id).then((paintings) => setPaintings(paintings));
+    }
+  }, [props.match.params.id]);
 
   const onDeletePainting = (id) => {
     setPaintings(paintings.filter((painting) => painting.id !== id));
@@ -16,13 +20,7 @@ function PaintingPage() {
 
   return (
     <div>
-      <h1>Paintings</h1>
-
-      <div className="right-align">
-        <Button variant="primary" href="painting">
-          Add a new Painting
-        </Button>
-      </div>
+      <h1>Paintings of {gallery.name}</h1>
 
       {!paintings || paintings.length === 0 ? (
         <p>No paintings found</p>
@@ -42,4 +40,4 @@ function PaintingPage() {
   );
 }
 
-export default PaintingPage;
+export default GalleryViewPage;

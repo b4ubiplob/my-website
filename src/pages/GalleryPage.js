@@ -57,6 +57,11 @@ function GalleryPage() {
                     <td>{gallery.name}</td>
                     <td>{gallery.description}</td>
                     <td>
+                      <Link to={"/gallery/" + gallery.id + "/paintings"}>
+                        View
+                      </Link>
+                    </td>
+                    <td>
                       <Link to={"/gallery/" + gallery.id}>Update</Link>
                     </td>
                     <td>
