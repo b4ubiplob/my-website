@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Card, Modal, Image, Button } from "react-bootstrap";
 import { BASE_API_URL } from "../util/constants";
 import { handleError } from "../util/errorutil";
-import { deletePainting } from "../actions/resthandler";
+import { deletePainting, saveGallery } from "../actions/resthandler";
 import { toast } from "react-toastify";
 
-function Painting({ painting, onDeletePainting }) {
+function Painting({ painting, onDeletePainting, gallery }) {
   const [showPainting, setShowPainting] = useState(false);
   const [selectedPainting, setSelectedPainting] = useState({});
 
@@ -19,6 +19,18 @@ function Painting({ painting, onDeletePainting }) {
       .then(() => {
         toast.success("The painting was successfully deleted");
         onDeletePainting(id);
+      })
+      .catch((error) => {
+        handleError(error);
+      });
+  };
+
+  const updateGalleryCover = (event, url) => {
+    gallery.coverImageUrl = url;
+    saveGallery(gallery)
+      .then((data) => {
+        console.log(data);
+        toast.success("The cover pic was updated");
       })
       .catch((error) => {
         handleError(error);
@@ -57,6 +69,15 @@ function Painting({ painting, onDeletePainting }) {
           >
             Delete
           </Button>
+          {gallery && (
+            <Button
+              variant="secondary"
+              className="painting-buttons"
+              onClick={(event) => updateGalleryCover(event, painting.url)}
+            >
+              Make Cover
+            </Button>
+          )}
         </Card.Body>
       </Card>
       <Modal show={showPainting} onHide={handlePaintingClose}>

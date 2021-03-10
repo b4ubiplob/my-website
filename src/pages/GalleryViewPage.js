@@ -31,6 +31,7 @@ function GalleryViewPage(props) {
               <Painting
                 painting={painting}
                 onDeletePainting={onDeletePainting}
+                gallery={gallery}
               />
             );
           })}

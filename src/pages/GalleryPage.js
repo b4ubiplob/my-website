@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { getAllGalleries, deleteGallery } from "../actions/resthandler";
 import Button from "react-bootstrap/Button";
-import Table from "react-bootstrap/Table";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { handleError } from "../util/errorutil";
+import Gallery from "../components/Gallery";
 
 function GalleryPage() {
   const [galleries, setGalleries] = useState([]);
@@ -40,42 +39,50 @@ function GalleryPage() {
       {!galleries || galleries.length === 0 ? (
         <div>No galleries found</div>
       ) : (
-        <Table striped border hover>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Description</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {galleries &&
-              galleries.map((gallery) => {
-                return (
-                  <tr>
-                    <td>{gallery.name}</td>
-                    <td>{gallery.description}</td>
-                    <td>
-                      <Link to={"/gallery/" + gallery.id + "/paintings"}>
-                        View
-                      </Link>
-                    </td>
-                    <td>
-                      <Link to={"/gallery/" + gallery.id}>Update</Link>
-                    </td>
-                    <td>
-                      <Link
-                        onClick={(event) => onDeleteGallery(event, gallery.id)}
-                      >
-                        Delete
-                      </Link>
-                    </td>
-                  </tr>
-                );
-              })}
-          </tbody>
-        </Table>
+        <div className="painting-list">
+          {galleries.map((gallery) => {
+            return (
+              <Gallery gallery={gallery} onDeleteGallery={onDeleteGallery} />
+            );
+          })}
+        </div>
+
+        // <Table striped border hover>
+        //   <thead>
+        //     <tr>
+        //       <th>Name</th>
+        //       <th>Description</th>
+        //       <th></th>
+        //       <th></th>
+        //     </tr>
+        //   </thead>
+        //   <tbody>
+        //     {galleries &&
+        //       galleries.map((gallery) => {
+        //         return (
+        //           <tr>
+        //             <td>{gallery.name}</td>
+        //             <td>{gallery.description}</td>
+        //             <td>
+        //               <Link to={"/gallery/" + gallery.id + "/paintings"}>
+        //                 View
+        //               </Link>
+        //             </td>
+        //             <td>
+        //               <Link to={"/gallery/" + gallery.id}>Update</Link>
+        //             </td>
+        //             <td>
+        //               <Link
+        //                 onClick={(event) => onDeleteGallery(event, gallery.id)}
+        //               >
+        //                 Delete
+        //               </Link>
+        //             </td>
+        //           </tr>
+        //         );
+        //       })}
+        //   </tbody>
+        // </Table>
       )}
     </>
   );
